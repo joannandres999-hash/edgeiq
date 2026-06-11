@@ -1,0 +1,11 @@
+{
+  "name": "edgeiq-scheduler",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node scheduler.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

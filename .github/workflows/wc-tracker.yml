@@ -1,0 +1,29 @@
+name: EDGEIQ World Cup Tracker
+
+on:
+  schedule:
+    # Corre cada 10 minutos
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # permite correrlo manualmente también
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run World Cup Tracker
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+        run: node scheduler.js
